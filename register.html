@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse – SportClub</title>
+  <style>
+    :root {
+      --purple-dark: #2e1a47;
+      --purple-mid:  #3f2561;
+      --purple-light: #f4f2f8;
+      --error-color: #e74c3c;
+      --text-muted: #666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--purple-light);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .register-container {
+      display: flex; width: 950px; min-height: 600px;
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .register-image {
+      flex: 1;
+      background-color: var(--purple-dark);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      color: white; padding: 40px; text-align: center;
+    }
+    .register-image h2 { font-size: 2.8rem; margin-bottom: 10px; }
+    .register-image p  { font-size: 1.1rem; opacity: 0.85; }
+    .register-form-side {
+      flex: 1.2; padding: 45px 50px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .auth-logo { height: 55px; margin-bottom: 18px; align-self: center; }
+    h1 { font-size: 2rem; color: var(--purple-dark); margin-bottom: 5px; text-align: center; }
+    .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem; }
+    #global-message {
+      padding: 12px 16px; border-radius: 10px; margin-bottom: 18px;
+      text-align: center; font-weight: 600; font-size: 0.9rem; display: none;
+    }
+    #global-message.error   { background:#fdeaea; color:#c0392b; border:1px solid #f5c6cb; }
+    #global-message.success { background:#eafaf1; color:#1e8449; border:1px solid #a9dfbf; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 5px; }
+    .form-group input {
+      width: 100%; padding: 12px 14px; border: 2px solid #eee;
+      border-radius: 10px; font-size: 0.95rem; transition: border-color 0.3s; background: #fdfdfd;
+    }
+    .form-group input:focus { border-color: var(--purple-dark); outline: none; background: white; }
+    .form-group input.invalid { border-color: var(--error-color); background: #fff8f8; }
+    .field-error { color: var(--error-color); font-size: 0.78rem; margin-top: 4px; display: none; }
+    .field-error.visible { display: block; }
+    .form-row { display: flex; gap: 14px; }
+    .form-row .form-group { flex: 1; }
+    .btn-register {
+      width: 100%; padding: 14px; background-color: var(--purple-dark);
+      color: white; border: none; border-radius: 10px;
+      font-size: 1rem; font-weight: 800; cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s; margin-top: 8px;
+    }
+    .btn-register:hover { background-color: var(--purple-mid); transform: translateY(-2px); }
+    .btn-register:disabled { background-color: #aaa; cursor: not-allowed; transform: none; }
+    .auth-links { margin-top: 20px; text-align: center; }
+    .auth-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
+    .auth-links a strong { color: var(--purple-dark); }
+    @media (max-width: 850px) {
+      .register-image { display: none; }
+      .register-container { width: 95%; }
+      .register-form-side { padding: 30px 25px; }
+    }
+  </style>
+</head>
+<body>
+<div class="register-container">
+
+  <div class="register-image">
+    <h2>¡ÚNETE!</h2>
+    <p>Crea tu cuenta y empieza a superar tus límites hoy mismo.</p>
+  </div>
+
+  <div class="register-form-side">
+    <img src="img/logo_empresa_letra_v1.png" alt="SportClub" class="auth-logo">
+    <h1>Crear cuenta</h1>
+    <p class="subtitle">Completa los datos para registrarte</p>
+
+    <div id="global-message"></div>
+
+    <form id="registerForm" novalidate>
+
+      <div class="form-group">
+        <label for="full_name">Nombre completo *</label>
+        <input type="text" id="full_name" placeholder="Ej: Juan Pérez">
+        <span class="field-error" id="error-full_name"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico *</label>
+        <input type="email" id="email" placeholder="tu@correo.com">
+        <span class="field-error" id="error-email"></span>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Contraseña *</label>
+          <input type="password" id="password" placeholder="Mín. 8 caracteres">
+          <span class="field-error" id="error-password"></span>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Repetir contraseña *</label>
+          <input type="password" id="confirm_password" placeholder="Repite tu contraseña">
+          <span class="field-error" id="error-confirm_password"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birth_date">Fecha de nacimiento <span style="font-weight:400;color:#999">(opcional)</span></label>
+        <input type="date" id="birth_date">
+        <span class="field-error" id="error-birth_date"></span>
+      </div>
+
+      <button type="submit" class="btn-register" id="btn-submit">REGISTRARME</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="index.html">¿Ya tienes cuenta? <strong>Inicia sesión</strong></a>
+    </div>
+  </div>
+
+</div>
+<script>
+const API_URL = 'http://localhost:3000';
+
+function validarFormulario(datos) {
+    const errores = {};
+    if (!datos.full_name) {
+        errores.full_name = 'El nombre completo es obligatorio.';
+    } else if (datos.full_name.length < 3) {
+        errores.full_name = 'El nombre debe tener al menos 3 caracteres.';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!datos.email) {
+        errores.email = 'El correo es obligatorio.';
+    } else if (!emailRegex.test(datos.email)) {
+        errores.email = 'Ingresa un correo válido (ej: nombre@dominio.com).';
+    }
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).+$/;
+    if (!datos.password) {
+        errores.password = 'La contraseña es obligatoria.';
+    } else if (datos.password.length < 8) {
+        errores.password = 'La contraseña debe tener mínimo 8 caracteres.';
+    } else if (!passwordRegex.test(datos.password)) {
+        errores.password = 'Debe contener letras y números.';
+    }
+    if (!datos.confirm_password) {
+        errores.confirm_password = 'Debes repetir tu contraseña.';
+    } else if (datos.password !== datos.confirm_password) {
+        errores.confirm_password = 'Las contraseñas no coinciden.';
+    }
+    return errores;
+}
+
+function mostrarErroresCampos(errores) {
+    document.querySelectorAll('.field-error').forEach(el => {
+        el.textContent = '';
+        el.classList.remove('visible');
+    });
+    document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
+    for (const campo in errores) {
+        const errorEl = document.getElementById(`error-${campo}`);
+        const inputEl = document.getElementById(campo);
+        if (errorEl) { errorEl.textContent = errores[campo]; errorEl.classList.add('visible'); }
+        if (inputEl) { inputEl.classList.add('invalid'); }
+    }
+}
+
+function mostrarMensajeGlobal(mensaje, tipo) {
+    const div = document.getElementById('global-message');
+    div.textContent = mensaje;
+    div.className = tipo;
+    div.style.display = 'block';
+}
+
+function limpiarMensajeGlobal() {
+    const div = document.getElementById('global-message');
+    div.style.display = 'none';
+    div.textContent = '';
+    div.className = '';
+}
+
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    limpiarMensajeGlobal();
+
+    const datos = {
+        full_name:        document.getElementById('full_name').value.trim(),
+        email:            document.getElementById('email').value.trim().toLowerCase(),
+        password:         document.getElementById('password').value,
+        confirm_password: document.getElementById('confirm_password').value,
+        birth_date:       document.getElementById('birth_date').value || null
+    };
+
+    const errores = validarFormulario(datos);
+    if (Object.keys(errores).length > 0) {
+        mostrarErroresCampos(errores);
+        return;
+    }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Registrando...';
+
+    try {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                full_name:  datos.full_name,
+                email:      datos.email,
+                password:   datos.password,
+                role:       'user',
+                birth_date: datos.birth_date
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+            mostrarMensajeGlobal(data.message || 'Error al registrar usuario.', 'error');
+            return;
+        }
+
+        mostrarMensajeGlobal('¡Cuenta creada exitosamente! Redirigiendo al login...', 'success');
+        setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+
+    } catch (error) {
+        mostrarMensajeGlobal('No se pudo conectar con el servidor. Intenta más tarde.', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'REGISTRARME';
+    }
+});
+</script>
+</body>
+</html>
