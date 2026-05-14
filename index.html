@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportClub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #2e1a47 0%, #7c3aed 100%);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .hero {
+      text-align: center; color: white; padding: 40px;
+    }
+    .logo { height: 70px; margin-bottom: 30px; }
+    .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; opacity: 0.75; margin-bottom: 50px; }
+    .buttons { display: flex; gap: 16px; justify-content: center; }
+    .btn-primary {
+      padding: 16px 40px; background: white; color: #2e1a47;
+      border: none; border-radius: 12px; font-size: 1rem; font-weight: 800;
+      cursor: pointer; text-decoration: none; transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); opacity: 0.9; }
+    .btn-secondary {
+      padding: 16px 40px; background: transparent; color: white;
+      border: 2px solid rgba(255,255,255,0.5); border-radius: 12px;
+      font-size: 1rem; font-weight: 800; cursor: pointer; text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { transform: translateY(-3px); border-color: white; }
+    .decorative {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .d1 { width: 500px; height: 500px; top: -100px; right: -100px; }
+    .d2 { width: 300px; height: 300px; bottom: -50px; left: -50px; }
+    .d3 { width: 150px; height: 150px; bottom: 100px; right: 200px; }
+  </style>
+</head>
+<body>
+  <div class="decorative d1"></div>
+  <div class="decorative d2"></div>
+  <div class="decorative d3"></div>
+
+  <div class="hero">
+    <img src="img/logo_empresa_letra_v1.png" alt="SportClub" class="logo">
+    <h1>SPORTCLUB</h1>
+    <p>Tu plataforma de entrenamiento deportivo profesional</p>
+    <div class="buttons">
+      <a href="login.html" class="btn-primary">Iniciar Sesión</a>
+      <a href="register.html" class="btn-secondary">Registrarse</a>
+    </div>
+  </div>
+</body>
+</html>
