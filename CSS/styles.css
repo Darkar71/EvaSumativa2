@@ -1,0 +1,108 @@
+:root {
+    --bg-color: #f7f9fc;
+    --card-color: #ffffff;
+    --primary-blue: #007bff;
+    --text-dark: #333333;
+    --error-color: #ef4444;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-card {
+    background-color: var(--card-color);
+    padding: 4rem 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: var(--text-dark);
+}
+
+.dashboard-card {
+    max-width: 800px;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.8rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: #fcfdfe;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.error-text {
+    color: var(--error-color);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    min-height: 1.2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-item {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.stat-item span {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.logout-btn {
+    background: #64748b;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
