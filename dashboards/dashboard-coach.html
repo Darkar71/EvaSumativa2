@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Coach – SportClub</title>
+  <style>
+    :root {
+      --green-dark: #1a6b3a;
+      --green-accent: #27ae60;
+      --sidebar-bg: #1a1a2e;
+      --bg: #edf6f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; min-height: 100vh; }
+
+    .sidebar {
+      width: 220px; background: var(--sidebar-bg); color: white;
+      display: flex; flex-direction: column; padding: 30px 0;
+      position: fixed; top: 0; left: 0; height: 100vh;
+    }
+    .sidebar-brand { padding: 0 24px 30px; font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; color: white; }
+    .sidebar-brand span { color: var(--green-accent); }
+    .sidebar-user { padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sidebar-user .name { font-weight: 700; font-size: 0.95rem; }
+    .sidebar-user .role-txt { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .sidebar nav { flex: 1; padding-top: 20px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 24px; color: rgba(255,255,255,0.65);
+      text-decoration: none; font-size: 0.9rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nav-item:hover { background: #16213e; color: white; }
+    .nav-item.active { background: var(--green-accent); color: white; }
+    .nav-item .icon { font-size: 1.1rem; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 20px 24px; }
+    .btn-logout-side {
+      width: 100%; padding: 10px; background: rgba(39,174,96,0.2);
+      color: var(--green-accent); border: 1px solid rgba(39,174,96,0.4);
+      border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: background 0.2s;
+    }
+    .btn-logout-side:hover { background: rgba(39,174,96,0.4); }
+
+    .main { margin-left: 220px; flex: 1; padding: 36px; }
+
+    .welcome-card {
+      background: linear-gradient(135deg, #1a6b3a, #27ae60);
+      border-radius: 20px; padding: 36px 40px; color: white; margin-bottom: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .welcome-card h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 6px; }
+    .welcome-card p { opacity: 0.8; font-size: 0.95rem; }
+    .role-badge {
+      background: rgba(255,255,255,0.2); padding: 8px 18px;
+      border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 28px; }
+    .card {
+      background: white; border-radius: 18px; padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(26,107,58,0.08);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; text-align: center; transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card .icon { font-size: 2.5rem; }
+    .card h3 { color: var(--green-dark); font-size: 1rem; font-weight: 700; }
+    .card p { color: #999; font-size: 0.82rem; }
+
+    .info-card {
+      background: white; border-radius: 18px; padding: 28px 32px;
+      box-shadow: 0 4px 20px rgba(26,107,58,0.08);
+    }
+    .info-card h2 { color: var(--green-dark); margin-bottom: 16px; font-size: 1.1rem; }
+    .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #edf6f0; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row span:first-child { color: #999; font-size: 0.88rem; }
+    .info-row span:last-child { color: var(--green-dark); font-weight: 700; font-size: 0.88rem; }
+  </style>
+</head>
+<body onload="initCoach()">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">⚡ SPORT<span>CLUB</span></div>
+    <div class="sidebar-user">
+      <div class="name" id="sidebar-name">...</div>
+      <div class="role-txt">Coach</div>
+    </div>
+    <nav>
+      <a class="nav-item active" href="dashboard-coach.html">
+        <span class="icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" href="perfil.html">
+        <span class="icon">👤</span> Mi Perfil
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout-side" onclick="logout()">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="welcome-card">
+      <div>
+        <h1>¡Bienvenido, Coach <span id="display-name">...</span>! 👟</h1>
+        <p>Gestiona tus alumnos y planifica sus rutinas.</p>
+      </div>
+      <span class="role-badge">COACH</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <span class="icon">📝</span>
+        <h3>Rutinas</h3>
+        <p>Crea y gestiona rutinas de entrenamiento</p>
+      </div>
+      <div class="card">
+        <span class="icon">📅</span>
+        <h3>Agenda</h3>
+        <p>Revisa tus clases programadas</p>
+      </div>
+      <div class="card">
+        <span class="icon">👥</span>
+        <h3>Mis alumnos</h3>
+        <p>Seguimiento de progreso</p>
+      </div>
+      <div class="card">
+        <span class="icon">📊</span>
+        <h3>Estadísticas</h3>
+        <p>Rendimiento del grupo</p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>📋 Mi perfil de entrenador</h2>
+      <div class="info-row">
+        <span>Rol</span>
+        <span>Coach / Entrenador</span>
+      </div>
+      <div class="info-row">
+        <span>Estado</span>
+        <span>✅ Activo</span>
+      </div>
+      <div class="info-row">
+        <span>Especialidad</span>
+        <span>Entrenamiento funcional</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="../JS/script.js"></script>
+  <script>
+    function initCoach() {
+      const token    = localStorage.getItem('token');
+      const userData = localStorage.getItem('user');
+      if (!token || !userData) { window.location.href = '../index.html'; return; }
+      const user = JSON.parse(userData);
+      document.getElementById('sidebar-name').textContent = user.full_name;
+      document.getElementById('display-name').textContent = user.full_name.split(' ')[0];
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '../index.html';
+    }
+  </script>
+</body>
+</html>
